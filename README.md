@@ -1,7 +1,7 @@
-###Android Apps repository
+#Android Apps repository
 
 *by Titov Vladislav*
 
-#Non-profit projects
+###Non-profit projects
 
 **Use free**
