@@ -18,8 +18,6 @@ public class FinishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
 
-        Toast.makeText(this, "FinishActivity start", Toast.LENGTH_SHORT).show();
-
         linearLayout = (LinearLayout) findViewById(R.id.ll_finish);
 
         Intent intent = getIntent();
