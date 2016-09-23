@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="50sp"
+            android:id="@+id/tv_out"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:scrollHorizontally="true"
+            android:gravity="end"
+            />
+    </HorizontalScrollView>
+
+
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/cancel"
+        android:text="C" />
+    <Button
+        android:id="@+id/delete"
+        android:text="Delete"/>
+    <Button
+        android:id="@+id/degree"
+        android:text="^"/>
+    <Button
+        android:id="@+id/div"
+        android:text="/" />
+    <Button
+        android:id="@+id/one"
+        android:text="1" />
+    <Button
+        android:id="@+id/two"
+        android:text="2" />
+    <Button
+        android:id="@+id/three"
+        android:text="3" />
+    <Button
+        android:id="@+id/mult"
+        android:text="*" />
+    <Button
+        android:id="@+id/four"
+        android:text="4" />
+    <Button
+        android:id="@+id/five"
+        android:text="5" />
+    <Button
+        android:id="@+id/six"
+        android:text="6" />
+    <Button
+        android:id="@+id/sub"
+        android:text="-" />
+    <Button
+        android:id="@+id/seven"
+        android:text="7" />
+    <Button
+        android:id="@+id/eight"
+        android:text="8" />
+    <Button
+        android:id="@+id/nine"
+        android:text="9" />
+    <Button
+        android:id="@+id/add"
+        android:layout_rowSpan="2"
+        android:text="+"
+        android:layout_gravity="fill_vertical"/>
+    <Button
+        android:id="@+id/zero"
+        android:text="0" />
+    <Button
+        android:id="@+id/two_zero"
+        android:text="00" />
+    <Button
+        android:id="@+id/left"
+        android:text="("/>
+    <Button
+        android:id="@+id/equals"
+        android:layout_columnSpan="2"
+        android:text="="
+        android:layout_gravity="fill" />
+    <Button
+        android:id="@+id/right"
+        android:text=")" />
+    <Button
+        android:id="@+id/comma"
+        android:text="."/>
+    </GridLayout>
+
+
+
+</LinearLayout>
