@@ -18,6 +18,7 @@ import com.therishka.androidlab_2.models.VkNewsItem;
 import com.therishka.androidlab_2.network.RxVk;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -92,6 +93,11 @@ public class NewsActivity extends AppCompatActivity {
                     Glide.with(context).load(item.getAttachments().get(0).getPhoto().getPhoto_1280())
                             .fitCenter()
                             .into(((NewsViewHolder) holder).news_image);
+
+                    Glide.with(context).load(item.getPublisher().getPhoto_50())
+                            .fitCenter()
+                            .into(((NewsViewHolder) holder).news_group_image);
+
                 }catch (NullPointerException e){
                     Log.d(myTag, e.getMessage());
                 }
@@ -113,6 +119,8 @@ public class NewsActivity extends AppCompatActivity {
 
     private class NewsViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView news_group_image;
+        TextView news_group_name;
         TextView news_text;
         ImageView news_image;
         TextView news_date;
@@ -121,6 +129,8 @@ public class NewsActivity extends AppCompatActivity {
         public NewsViewHolder(View itemView) {
             super(itemView);
 
+            news_group_image = (ImageView) itemView.findViewById(R.id.news_group_image);
+            news_group_name = (TextView) itemView.findViewById(R.id.news_group_name);
             news_text = (TextView) itemView.findViewById(R.id.news_text);
             news_image = (ImageView) itemView.findViewById(R.id.news_image);
             news_date = (TextView) itemView.findViewById(R.id.news_date_view);
@@ -129,9 +139,12 @@ public class NewsActivity extends AppCompatActivity {
 
         public void bind(VkNewsItem item){
             try {
+                Date date = new Date(item.getDate()*1000);
                 SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yy hh:mm");
+
+                news_group_name.setText(item.getPublisher().getName());
                 news_text.setText(item.getText());
-                news_date.setText(format1.format(item.getDate()));
+                news_date.setText(format1.format(date));
                 news_count_likes.setText(String.valueOf(item.getLikes().getCount()));
             }catch (NullPointerException e){
                 Log.d(myTag, e.getMessage());
