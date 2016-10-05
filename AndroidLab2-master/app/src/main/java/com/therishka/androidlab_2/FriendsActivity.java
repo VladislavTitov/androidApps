@@ -97,7 +97,7 @@ public class FriendsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View itemView = LayoutInflater.from(mContext).inflate(R.layout.friend_item, viewGroup, false);
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.friend1_item, viewGroup, false);
             TextView name = (TextView) itemView.findViewById(R.id.full_name);
             ImageView avatar = (ImageView) itemView.findViewById(R.id.avatar);
             View isOnline = itemView.findViewById(R.id.is_user_online);
