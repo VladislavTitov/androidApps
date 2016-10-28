@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.vladislav.numberlist.InfoActivity;
+import com.example.vladislav.numberlist.MainActivity;
 import com.example.vladislav.numberlist.contacts.Contact;
 import com.example.vladislav.numberlist.contacts.ContactsProvider;
 import com.example.vladislav.numberlist.listeners.ItemLongClickListener;
@@ -59,8 +60,9 @@ public class NumberFragment extends android.support.v4.app.Fragment{
         final View view = inflater.inflate(R.layout.fragment_pager_list, container, false);
         rv = (RecyclerView)view.findViewById(R.id.list_number);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ListAdapter listAdapter = new ListAdapter(position, inflater);
+        final ListAdapter listAdapter = new ListAdapter(position, inflater);
         listAdapter.setBigMode(isBigMode);
+        Log.d(ContactsProvider.MY_TAG, "Creating ListAdapter with isBig mode: " + isBigMode);
         rv.setAdapter(listAdapter);
         return view;
     }
@@ -149,27 +151,28 @@ public class NumberFragment extends android.support.v4.app.Fragment{
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int i) {
             if (holder instanceof ListViewHolder){
-                ((ListViewHolder) holder).getTvNumber().setText(contacts.get(position).getUsername());
+                ((ListViewHolder) holder).getTvNumber().setText(contacts.get(i).getUsername());
                 if (position == 0) {
                     ((ListViewHolder) holder).getItemView().setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            itemLongClickListener.onItemLongClick(position);
+                            itemLongClickListener.onItemLongClick(i);
                             return false;
                         }
                     });
                     ((ListViewHolder) holder).getItemView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (isBigMode){
+                            Log.d(ContactsProvider.MY_TAG, "Click " + isBigMode);
+                            if (((MainActivity)getActivity()).amIBig()){
 
                                 InfoFragment fragment = new InfoFragment();
 
                                 Bundle bundle = new Bundle();
-                                bundle.putString("name", contacts.get(position).getUsername());
-                                bundle.putString("number", contacts.get(position).getPhoneNumber());
+                                bundle.putString("name", contacts.get(i).getUsername());
+                                bundle.putString("number", contacts.get(i).getPhoneNumber());
 
                                 fragment.setArguments(bundle);
 
@@ -180,8 +183,8 @@ public class NumberFragment extends android.support.v4.app.Fragment{
 
                             }else {
                                 Intent intent = new Intent(getActivity(), InfoActivity.class);
-                                intent.putExtra("name", contacts.get(position).getUsername());
-                                intent.putExtra("number", contacts.get(position).getPhoneNumber());
+                                intent.putExtra("name", contacts.get(i).getUsername());
+                                intent.putExtra("number", contacts.get(i).getPhoneNumber());
                                 startActivity(intent);
                             }
                         }

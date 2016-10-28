@@ -69,6 +69,8 @@ public class ContactsProvider {
     }
 
     public void restoreContacts(Context context){
+        contacts.clear();
+        deletedContacts.clear();
         SharedPreferences prefs = context.getSharedPreferences(CONTACTS_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences delPrefs = context.getSharedPreferences(DELETED_PREFERENCES, Context.MODE_PRIVATE);
         Map<String, String> allContacts = (Map<String, String>) prefs.getAll();

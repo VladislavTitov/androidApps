@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements DeleteContactFrag
 
     }
 
+    public boolean amIBig(){
+        return isBigMode;
+    }
+
     @Override
     public void onDialogPositiveClick() {
         Log.d(ContactsProvider.MY_TAG, "Dialog Positive Click");
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements DeleteContactFrag
             super(fm);
             contactFragment = (NumberFragment) NumberFragment.newInstance(0, isBigMode);
             deletedContactFragment = (NumberFragment) NumberFragment.newInstance(1, isBigMode);
+            Log.d(ContactsProvider.MY_TAG, "This is constructor of PageAdapter " + isBigMode);
             notifyDataSetChanged();
         }
 
