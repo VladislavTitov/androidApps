@@ -44,9 +44,13 @@ public class RetrofitAsyncTask extends AsyncTask<String, Void, String> {
 
             Response<MyWeather> response = myWeatherCall.execute();
 
-            MyWeather myWeather = response.body();
+            if (response.isSuccessful()) {
+                MyWeather myWeather = response.body();
+                temp = String.valueOf(myWeather.getMain().getTemp());
+            }else {
+                temp = "Error: " + response.code() + "\n" + response.errorBody();
+            }
 
-            temp = String.valueOf(myWeather.getMain().getTemp());
 
         }catch (IOException e){
             e.printStackTrace();
