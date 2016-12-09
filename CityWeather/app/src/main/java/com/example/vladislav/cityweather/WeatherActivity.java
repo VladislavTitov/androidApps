@@ -1,15 +1,26 @@
 package com.example.vladislav.cityweather;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class WeatherActivity extends AppCompatActivity implements AsycCallback{
+import com.example.vladislav.cityweather.services.WeatherIntentService;
+import com.example.vladislav.cityweather.services.WeatherIntentServiceResult;
+import com.example.vladislav.cityweather.services.WeatherReceiver;
+
+public class WeatherActivity extends AppCompatActivity implements AsycCallback, WeatherIntentServiceResult{
 
     TextView cityName;
     TextView temp;
+
+    WeatherReceiver receiver;
+
+    public static final String ACTION_NAME_FOR_SERVICE = "com.example.vladislav.Service";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +32,11 @@ public class WeatherActivity extends AppCompatActivity implements AsycCallback{
 
         cityName.setText(getIntent().getStringExtra("city"));
 
-        getWeatherFragment();
+        Intent intent = new Intent(this, WeatherIntentService.class);
+        intent.putExtra("name", getIntent().getStringExtra("city"));
+        startService(intent);
+
+        //getWeatherFragment();
     }
 
     public WeatherFragment getWeatherFragment(){
@@ -43,11 +58,25 @@ public class WeatherActivity extends AppCompatActivity implements AsycCallback{
                     .commit();
         }
         return fragment;
-
     }
 
     @Override
     public void getTemp(String temp) {
         this.temp.setText(temp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        receiver = new WeatherReceiver(this);
+        IntentFilter filter = new IntentFilter(ACTION_NAME_FOR_SERVICE);
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (intent.getStringExtra("temp") != null){
+            temp.setText(intent.getStringExtra("temp"));
+        }
     }
 }

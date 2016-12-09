@@ -101,8 +101,6 @@ public class WeatherFragment extends Fragment {
 
                 Call<MyWeather> myWeatherCall = service.myWeather(cityName, WeatherService.appid);
 
-            /*Request request = myWeatherCall.request();*/
-
                 Response<MyWeather> response = myWeatherCall.execute();
 
                 if (response.isSuccessful()) {
