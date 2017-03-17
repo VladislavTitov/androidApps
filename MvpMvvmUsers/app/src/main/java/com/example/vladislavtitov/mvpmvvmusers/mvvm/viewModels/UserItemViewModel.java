@@ -14,7 +14,7 @@ public class UserItemViewModel extends BaseObservable{
     private User user;
     private int position;
     private MvvmActivity context;
-    private final ObservableField<String> fullname = new ObservableField<>();
+    public final ObservableField<String> fullname = new ObservableField<>();
 
     public UserItemViewModel() {
     }
