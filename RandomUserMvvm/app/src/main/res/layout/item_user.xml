@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="itemUserVM"
+            type="com.example.vladislavtitov.randomusermvvm.viewModels.ItemUserViewModel"/>
+    </data>
+    <RelativeLayout
+        android:id="@+id/item_user"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:onClick="@{(v) -> itemUserVM.toDetails()}">
+
+        <ImageView
+            android:id="@+id/item_photo"
+            android:layout_margin="15dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/item_photo">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/item_name"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:text="@{itemUserVM.name}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/item_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="@{itemUserVM.username}"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_alignParentBottom="true"
+            android:alpha="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"/>
+
+    </RelativeLayout>
+</layout>
