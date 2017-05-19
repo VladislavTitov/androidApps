@@ -37,8 +37,7 @@ public class WeatherCityProvider extends ContentProvider{
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         String table = getType(uri);
-        openHelper.getReadableDatabase().query(table, projection, selection, selectionArgs, null, null, null);
-        return null;
+        return openHelper.getReadableDatabase().query(table, projection, selection, selectionArgs, null, null, null);
     }
 
     @Nullable
